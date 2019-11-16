@@ -1,0 +1,93 @@
+import random
+
+
+
+
+wordList = ["happy", "madee","harold","adobo",
+"dog"]
+
+guess_word = []
+secretWord = random.choice(wordList) 
+length_word = len(secretWord)
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+letterGuessed = []
+
+
+
+def beginning():
+
+    while True:
+        name = input("Please enter Your name\n").strip()
+
+        if name == '':
+            print("You can't do that! No blank lines")
+        else:
+            break
+
+beginning()
+
+def isWordGuessed():
+
+    for character in secretWord: 
+        guess_word.append("-")
+
+    print("Ok, so the word You need to guess has", length_word, "characters")
+
+
+    print(guess_word)
+    
+def guesses_taken(current: int, total: int):
+    print("You are on guess {0}/{1}.".format(current, total))
+    
+
+
+def getGuessedWord():
+    guess_taken = 1
+    MAX_GUESS = 10
+    guesses_taken(guess_taken, MAX_GUESS)
+
+    while guess_taken < 10:
+
+        print("You've Guessed letters: ", letterGuessed)
+        guess = input("Pick a letter\n").lower()
+        
+        
+       
+
+        if not guess in alphabet: 
+            print("Enter a letter from a-z alphabet")
+        elif guess in letterGuessed: 
+            print("You have already guessed that letter!")
+        else: 
+
+            letterGuessed.append(guess)
+            if guess in secretWord:
+                print("You guessed correctly!")
+                for x in range(0, length_word): 
+                    if secretWord[x] == guess:
+                        guess_word[x] = guess
+                        print(guess_word)
+                        guesses_taken(guess_taken, MAX_GUESS)
+                        
+                if not '-' in guess_word:
+                    print("Congratulations, You won!")
+                    break
+            else:
+                print("The letter is not in the word",(guess_word),"Try Again!")
+                
+                
+                guess_taken += 1
+                guesses_taken(guess_taken, MAX_GUESS)
+                if guess_taken == 10:
+                    print("The secret word was",secretWord)
+
+isWordGuessed()
+getGuessedWord()
+
+
+print("Sorr, Game Over!")
+
+
+
+
+
